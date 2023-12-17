@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\ilkin\\source\\repos\\BestStoreApi.Net_Core_7\\BestStoreApi.Net_Core_7\\wwwroot\\images\\products20231217232255301.png",
+      "PackagePath": "staticwebassets\\images\\products20231217232255301.png"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.BestStoreApi.Net_Core_7.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.BestStoreApi.Net_Core_7.props",
+      "PackagePath": "build\\BestStoreApi.Net_Core_7.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.BestStoreApi.Net_Core_7.props",
+      "PackagePath": "buildMultiTargeting\\BestStoreApi.Net_Core_7.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.BestStoreApi.Net_Core_7.props",
+      "PackagePath": "buildTransitive\\BestStoreApi.Net_Core_7.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

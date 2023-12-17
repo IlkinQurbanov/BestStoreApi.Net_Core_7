@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\BestStoreApi.Net_Core_7.props" />
+</Project>

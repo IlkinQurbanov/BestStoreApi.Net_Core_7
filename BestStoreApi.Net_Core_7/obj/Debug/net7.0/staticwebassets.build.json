@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "Hash": "wHUuf8Rmtviz9Ys/bx3snuk9KNZxB1M7On0cMJBjpLQ=",
+  "Source": "BestStoreApi.Net_Core_7",
+  "BasePath": "_content/BestStoreApi.Net_Core_7",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "BestStoreApi.Net_Core_7\\wwwroot",
+      "Source": "BestStoreApi.Net_Core_7",
+      "ContentRoot": "C:\\Users\\ilkin\\source\\repos\\BestStoreApi.Net_Core_7\\BestStoreApi.Net_Core_7\\wwwroot\\",
+      "BasePath": "_content/BestStoreApi.Net_Core_7",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\ilkin\\source\\repos\\BestStoreApi.Net_Core_7\\BestStoreApi.Net_Core_7\\wwwroot\\images\\products20231217232255301.png",
+      "SourceId": "BestStoreApi.Net_Core_7",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ilkin\\source\\repos\\BestStoreApi.Net_Core_7\\BestStoreApi.Net_Core_7\\wwwroot\\",
+      "BasePath": "_content/BestStoreApi.Net_Core_7",
+      "RelativePath": "images/products20231217232255301.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\products20231217232255301.png"
+    }
+  ]
+}
