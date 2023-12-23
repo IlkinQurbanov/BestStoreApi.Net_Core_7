@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -239,29 +240,7 @@ namespace BestStoreApi.Net_Core_7.Controllers
         [HttpGet("Profile")]
         public IActionResult GetProfile()
         {
-            var identity = User.Identity as ClaimsIdentity;
-
-            if(identity == null)
-            {
-                return Unauthorized();
-            }
-
-            var claim = identity.Claims.FirstOrDefault(c => c.Type.ToLower() == "id");
-            if(claim == null)
-            {
-                return Unauthorized();
-
-            }
-
-            int id;
-            try
-            {
-                id = int.Parse(claim.Value);
-            }
-            catch(Exception ex)
-            {
-                return Unauthorized();
-            }
+           int id =  GetUserId();
 
             var user = context.Users.Find(id);
             if(user == null)
@@ -284,6 +263,110 @@ namespace BestStoreApi.Net_Core_7.Controllers
             };
 
             return Ok(userProfileDto);
+        }
+
+
+
+        [Authorize]
+        [HttpPut("UpdateProfile")]
+        public IActionResult UpdateProfile(UserProfileUpdateDto userProfileUpdateDto)
+        {
+            int id = GetUserId();
+
+            var user = context.Users.Find(id);
+            if(user == null)
+            {
+                return Unauthorized();
+            }
+            //update the user profile
+
+            user.FirstName = userProfileUpdateDto.FirstName;
+            user.LastName = userProfileUpdateDto.LastName;
+            user.Email = userProfileUpdateDto.Email;
+            user.Phone = userProfileUpdateDto.Phone ?? "";
+            user.Address = userProfileUpdateDto.Address;
+
+            context.SaveChanges();
+
+            var userProfileDto = new UserProfileDto()
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Phone = user.Phone,
+                Address = user.Address,
+                Role = user.Role,
+                CreatedAt = user.Created
+
+
+            };
+
+            return Ok(userProfileDto);
+
+
+        }
+
+
+
+        [Authorize]
+        [HttpPut("UpdatePassword")]
+        public IActionResult UpdatePassword([Required, MinLength(8), MaxLength(100)] string password)
+        {
+            int id = GetUserId();
+
+            var user = context.Users.Find(id);
+            if(user == null)
+            {
+                return Unauthorized();
+            }
+
+            //encrypt password
+
+            var passwordHasher = new PasswordHasher<User>();
+            string encryptedPassword = passwordHasher.HashPassword(new User(), password);
+
+            //update the user password
+
+            user.Password = encryptedPassword;
+            context.SaveChanges();
+
+            return Ok();
+        }
+
+
+
+
+
+
+        //Method for get user idUpdatePassword
+        private int GetUserId()
+        {
+            var identity = User.Identity as ClaimsIdentity;
+
+            if (identity == null)
+            {
+                return 0;
+            }
+
+            var claim = identity.Claims.FirstOrDefault(c => c.Type.ToLower() == "id");
+            if (claim == null)
+            {
+                return 0;
+
+            }
+
+            int id;
+            try
+            {
+                id = int.Parse(claim.Value);
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+
+            return id;
         }
 
 
