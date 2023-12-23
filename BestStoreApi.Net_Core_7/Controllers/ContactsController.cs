@@ -11,11 +11,13 @@ namespace BestStoreApi.Net_Core_7.Controllers
     public class ContactsController : ControllerBase
     {
         private readonly ApplicationDbContext context;
+        private readonly EmailSender emailSender;
       
-        public ContactsController(ApplicationDbContext context)
+        public ContactsController(ApplicationDbContext context, EmailSender emailSender)
         {
 
             this.context = context;
+            this.emailSender = emailSender;
         }
 
 
@@ -102,7 +104,20 @@ namespace BestStoreApi.Net_Core_7.Controllers
             };
             context.Contacts.Add(contact);
             context.SaveChanges();
-            return Ok();
+
+            //send confirmation email
+            string emailSubject = "Contact Confirmation";
+            string username = contactDto.FirstName + " " + contactDto.LastName;
+            string emailMessage = "Dear" + username + "\n" +
+                "We received your message .Thank you for contacting us. \n" +
+                "Our teeam will contact your very soon. \n" +
+                "Best Regards\n\n" +
+                "Your Message:\n" + contactDto.Message;
+
+         //   EmailSender emailSender = new EmailSender();
+            emailSender.SendEmail(emailSubject, contact.Email, username, emailMessage).Wait();
+
+                return Ok();
         }
 
         [HttpPut("{id}")]

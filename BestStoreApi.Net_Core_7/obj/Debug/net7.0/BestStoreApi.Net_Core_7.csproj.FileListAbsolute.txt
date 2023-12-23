@@ -75,3 +75,10 @@ C:\Users\ilkin\source\repos\BestStoreApi.Net_Core_7\BestStoreApi.Net_Core_7\obj\
 C:\Users\ilkin\source\repos\BestStoreApi.Net_Core_7\BestStoreApi.Net_Core_7\obj\Debug\net7.0\BestStoreApi.Net_Core_7.genruntimeconfig.cache
 C:\Users\ilkin\source\repos\BestStoreApi.Net_Core_7\BestStoreApi.Net_Core_7\obj\Debug\net7.0\ref\BestStoreApi.Net_Core_7.dll
 C:\Users\ilkin\source\repos\BestStoreApi.Net_Core_7\BestStoreApi.Net_Core_7\bin\Debug\net7.0\BestStoreApi.Net_Core_7.staticwebassets.runtime.json
+C:\Users\ilkin\source\repos\BestStoreApi.Net_Core_7\BestStoreApi.Net_Core_7\bin\Debug\net7.0\Scrutor.dll
+C:\Users\ilkin\source\repos\BestStoreApi.Net_Core_7\BestStoreApi.Net_Core_7\bin\Debug\net7.0\Swashbuckle.AspNetCore.Filters.dll
+C:\Users\ilkin\source\repos\BestStoreApi.Net_Core_7\BestStoreApi.Net_Core_7\bin\Debug\net7.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll
+C:\Users\ilkin\source\repos\BestStoreApi.Net_Core_7\BestStoreApi.Net_Core_7\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\ilkin\source\repos\BestStoreApi.Net_Core_7\BestStoreApi.Net_Core_7\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\ilkin\source\repos\BestStoreApi.Net_Core_7\BestStoreApi.Net_Core_7\bin\Debug\net7.0\SendGrid.dll
+C:\Users\ilkin\source\repos\BestStoreApi.Net_Core_7\BestStoreApi.Net_Core_7\bin\Debug\net7.0\StarkbankEcdsa.dll
