@@ -192,6 +192,8 @@ namespace BestStoreApi.Net_Core_7.Controllers
         }
 
 
+
+
         [HttpPost("ResetPassword")]
 
         public IActionResult ResetPassword(string token, string password)
@@ -231,6 +233,58 @@ namespace BestStoreApi.Net_Core_7.Controllers
 
         }
 
+
+
+        [Authorize]
+        [HttpGet("Profile")]
+        public IActionResult GetProfile()
+        {
+            var identity = User.Identity as ClaimsIdentity;
+
+            if(identity == null)
+            {
+                return Unauthorized();
+            }
+
+            var claim = identity.Claims.FirstOrDefault(c => c.Type.ToLower() == "id");
+            if(claim == null)
+            {
+                return Unauthorized();
+
+            }
+
+            int id;
+            try
+            {
+                id = int.Parse(claim.Value);
+            }
+            catch(Exception ex)
+            {
+                return Unauthorized();
+            }
+
+            var user = context.Users.Find(id);
+            if(user == null)
+            {
+                return Unauthorized();
+            }
+
+            var userProfileDto = new UserProfileDto()
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Phone = user.Phone,
+                Address = user.Address,
+                Role = user.Role,
+                CreatedAt = user.Created
+
+
+            };
+
+            return Ok(userProfileDto);
+        }
 
 
 
