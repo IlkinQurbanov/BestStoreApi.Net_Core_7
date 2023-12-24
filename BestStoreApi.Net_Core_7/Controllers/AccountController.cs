@@ -240,7 +240,7 @@ namespace BestStoreApi.Net_Core_7.Controllers
         [HttpGet("Profile")]
         public IActionResult GetProfile()
         {
-           int id =  GetUserId();
+           int id =  JwtReader.GetUserId(User);
 
             var user = context.Users.Find(id);
             if(user == null)
@@ -271,7 +271,7 @@ namespace BestStoreApi.Net_Core_7.Controllers
         [HttpPut("UpdateProfile")]
         public IActionResult UpdateProfile(UserProfileUpdateDto userProfileUpdateDto)
         {
-            int id = GetUserId();
+            int id = JwtReader.GetUserId(User);
 
             var user = context.Users.Find(id);
             if(user == null)
@@ -313,7 +313,7 @@ namespace BestStoreApi.Net_Core_7.Controllers
         [HttpPut("UpdatePassword")]
         public IActionResult UpdatePassword([Required, MinLength(8), MaxLength(100)] string password)
         {
-            int id = GetUserId();
+            int id = JwtReader.GetUserId(User);
 
             var user = context.Users.Find(id);
             if(user == null)
@@ -338,36 +338,6 @@ namespace BestStoreApi.Net_Core_7.Controllers
 
 
 
-
-        //Method for get user idUpdatePassword
-        private int GetUserId()
-        {
-            var identity = User.Identity as ClaimsIdentity;
-
-            if (identity == null)
-            {
-                return 0;
-            }
-
-            var claim = identity.Claims.FirstOrDefault(c => c.Type.ToLower() == "id");
-            if (claim == null)
-            {
-                return 0;
-
-            }
-
-            int id;
-            try
-            {
-                id = int.Parse(claim.Value);
-            }
-            catch (Exception ex)
-            {
-                return 0;
-            }
-
-            return id;
-        }
 
 
 

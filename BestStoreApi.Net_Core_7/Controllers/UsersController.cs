@@ -74,5 +74,33 @@ namespace BestStoreApi.Net_Core_7.Controllers
             return Ok(response);
 
         }
+
+
+
+        [HttpGet("{id}")]
+        public IActionResult GetUser(int id)
+        {
+            var user = context.Users.Find(id);
+
+            if(user == null)
+            {
+                return NotFound();
+            }
+
+            var userProfileDto = new UserProfileDto()
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Address = user.Address,
+                Phone = user.Phone,
+                Email = user.Email,
+                Role = user.Role,
+                CreatedAt = user.Created
+            };
+            return Ok(userProfileDto);
+
+        }
+
     }
 }
