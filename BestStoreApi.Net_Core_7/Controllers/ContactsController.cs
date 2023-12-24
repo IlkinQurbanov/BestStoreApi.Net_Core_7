@@ -1,5 +1,6 @@
 ﻿using BestStoreApi.Net_Core_7.Models;
 using BestStoreApi.Net_Core_7.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +31,7 @@ namespace BestStoreApi.Net_Core_7.Controllers
             return Ok(listSubjects);
         }
 
-
+        [Authorize (Roles = "admin")]
         [HttpGet]
         public IActionResult GetContacts(int? page)
         {
@@ -68,6 +69,7 @@ namespace BestStoreApi.Net_Core_7.Controllers
             return Ok(contacts);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet("{id}")]
         public IActionResult GetContact(int id)
         {
@@ -148,7 +150,7 @@ namespace BestStoreApi.Net_Core_7.Controllers
             return Ok(contact);
         }
 
-
+        [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
         public IActionResult DeleteContact(int id)
         {

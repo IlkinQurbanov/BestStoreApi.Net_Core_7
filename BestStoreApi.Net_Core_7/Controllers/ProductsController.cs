@@ -1,5 +1,6 @@
 ﻿using BestStoreApi.Net_Core_7.Models;
 using BestStoreApi.Net_Core_7.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography.Xml;
@@ -168,6 +169,9 @@ namespace BestStoreApi.Net_Core_7.Controllers
             }
             return Ok(product);
         }
+
+
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public IActionResult CreateProduct([FromForm] ProductDto productDto)
         {
@@ -218,8 +222,8 @@ namespace BestStoreApi.Net_Core_7.Controllers
         }
 
 
+        [Authorize(Roles = "admin")]
         [HttpPut("{id}")]
-
         public IActionResult UpdateProduct(int id, [FromForm] ProductDto productDto)
         {
 
@@ -273,6 +277,7 @@ namespace BestStoreApi.Net_Core_7.Controllers
         }
 
 
+        [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
         public IActionResult DeleteProduct(int id)
         {
