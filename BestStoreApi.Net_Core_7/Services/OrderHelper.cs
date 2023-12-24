@@ -25,7 +25,7 @@ namespace BestStoreApi.Net_Core_7.Services
 
 
 
-        public Dictionary<int, int> GetProductDictionary(string prodcuctIdentifiers )
+        public static Dictionary<int, int> GetProductDictionary(string prodcuctIdentifiers )
         {
             var productDictionary =  new Dictionary<int, int>();
 
