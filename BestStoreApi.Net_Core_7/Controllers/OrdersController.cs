@@ -85,6 +85,47 @@ namespace BestStoreApi.Net_Core_7.Controllers
         }
 
 
+        [Authorize]
+        [HttpGet("{id}")]
+        public IActionResult GetOrder(int id )
+        {
+            int userId = JwtReader.GetUserId(User);
+            string role = context.Users.Find(userId)?.Role ?? ""; //j\JwtReader.GetUserRole(User);
+
+            Order? order = null;
+
+            if(role == "admin")
+            {
+                order = context.Orders.Include(o => o.User)
+                    .Include(o => o.OrderItems).ThenInclude(oi => oi.Product)
+                    .FirstOrDefault(o => o.Id == id);
+            }
+            else
+            {
+
+                order = context.Orders.Include(o => o.User)
+                    .Include(o => o.OrderItems).ThenInclude(oi => oi.Product)
+                    .FirstOrDefault(o => o.Id == id && o.UserId == userId);
+            }
+
+            if(order == null)
+            {
+                return NotFound();
+            }
+
+            //get ride of the object cycle
+            foreach(var item in order.OrderItems)
+            {
+                item.Order = null;
+            }
+
+            //hide the user password
+            order.User.Password = "";
+
+            return Ok(order);
+        }
+
+
 
         [Authorize]
         [HttpPost]
