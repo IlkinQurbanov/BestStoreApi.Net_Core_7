@@ -129,7 +129,7 @@ namespace BestStoreApi.Net_Core_7.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult CreateOrder(OrderDto orderDto)
+         public IActionResult CreateOrder(OrderDto orderDto)
         {
             //check the payment method valid or not
             if(OrderHelper.PaymentMethods.ContainsKey(orderDto.PaymentMethod))
@@ -190,5 +190,54 @@ namespace BestStoreApi.Net_Core_7.Controllers
             return Ok(order);
 
         }
+
+
+        [Authorize(Roles ="admin")]
+        [HttpPut("{id}")]
+        public IActionResult UpdateOrder(int id, string? paymentStatus, string? orderStatus)
+        {
+            if (paymentStatus == null && orderStatus == null)
+            {
+                //we have nothing to do
+                ModelState.AddModelError("Update Order", "There is nothing to update");
+                return BadRequest(ModelState);
+            }
+
+            if(paymentStatus != null && !OrderHelper.PaymentStatutes.Contains(paymentStatus))
+            {
+                // the payment method is not valid
+                ModelState.AddModelError("Payment Status", "The payment status is not valid");
+                return BadRequest(ModelState);
+            }
+            if (orderStatus != null && !OrderHelper.OrderStatuses.Contains(orderStatus))
+            {
+                // the payment method is not valid
+                ModelState.AddModelError("Order Status", "The order status is not valid");
+                return BadRequest(ModelState);
+            }
+
+            var order = context.Orders.Find(id);
+
+            if(order == null)
+            {
+                return NotFound();
+            }
+
+            if(paymentStatus != null)
+            {
+                order.PaymentStatus = paymentStatus;
+            }
+
+            if(orderStatus != null)
+            {
+                order.OrderStatus = orderStatus;
+            }
+            context.SaveChanges();
+            return Ok(order);
+
+        }
+
     }
+
+
 }
