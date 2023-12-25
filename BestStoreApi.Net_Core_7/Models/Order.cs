@@ -21,8 +21,10 @@ namespace BestStoreApi.Net_Core_7.Models
         [MaxLength(40)]
         public string OrderStatus { get; set; } = "";
 
-        
-        
+        //navigate properties
 
+        public User User { get; set; } = null!;
+
+        public List<OrderItem> OrderItems { get; set; }
     }
 }
