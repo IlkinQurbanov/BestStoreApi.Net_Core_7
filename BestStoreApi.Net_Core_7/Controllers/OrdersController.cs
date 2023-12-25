@@ -235,6 +235,25 @@ namespace BestStoreApi.Net_Core_7.Controllers
             context.SaveChanges();
             return Ok(order);
 
+
+        }
+
+
+        [Authorize(Roles ="admin")]
+        [HttpDelete("{id}")]
+        public IActionResult DeleteOrder(int id)
+        {
+            var order = context.Orders.Find(id);
+            
+            if(order ==null)
+            {
+                return NotFound();
+            }
+
+            context.Orders.Remove(order);
+            context.SaveChanges();
+            return Ok();
+
         }
 
     }
