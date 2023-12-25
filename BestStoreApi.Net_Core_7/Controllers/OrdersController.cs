@@ -23,7 +23,7 @@ namespace BestStoreApi.Net_Core_7.Controllers
 
         [Authorize]
         [HttpGet]
-        public IActionResult GetOrders()
+        public IActionResult GetOrders(int? page)
         {
             int userId = JwtReader.GetUserId(User);
             string role = context.Users.Find(userId)?.Role ?? ""; //JwtReader.GetUserRole(User);
@@ -39,6 +39,23 @@ namespace BestStoreApi.Net_Core_7.Controllers
 
             query = query.OrderByDescending(o => o.Id);
 
+            //implement the pagination functionality
+
+            if(page == null || page < 1)
+            {
+                page = 1;
+            }
+
+            int pageSize = 5;
+            int totalPages = 0;
+
+            decimal count = query.Count();
+            totalPages = (int)Math.Ceiling(count / pageSize);
+
+            query = query.Skip((int)(page - 1) * pageSize).Take(pageSize);
+
+
+
             //read the orders
             var orders = query.ToList();
 
@@ -52,7 +69,18 @@ namespace BestStoreApi.Net_Core_7.Controllers
                 }
                 order.User.Password = "";
             }
-            return Ok(orders);
+
+
+            var response = new
+            {
+                Orders = orders,
+                TotalPages = totalPages,
+                PageSize = pageSize,
+                Page = page
+
+            };
+
+            return Ok(response);
                 
         }
 
